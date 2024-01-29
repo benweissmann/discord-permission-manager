@@ -108,8 +108,11 @@ export default async function loadDiscordData(
     };
   }
 
+  // TODO: we should probably paginate this
   const apiUsers = (await client.get(
-    Routes.guildMembers(serverId)
+    Routes.guildMembers(serverId), {
+      query: new URLSearchParams({ limit: "1000" }),
+    },
   )) as APIGuildMember[];
 
   const userNames: { [id: string]: string } = {};
