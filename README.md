@@ -32,7 +32,7 @@ You should end up with a `terraform-provider-discord` binary. Running this binar
 
 Then, instruct Terraform to use your fork by creating a `.terraformrc` file in your Home directory with:
 
-```json
+```terraform
 provider_installation {
   dev_overrides {
     "registry.terraform.io/Lucky3028/discord" = "/path/to/repo/for/terraform-provider-discord"
