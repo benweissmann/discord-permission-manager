@@ -45,10 +45,10 @@ Note that that path is to the *git repository directory*, not the binary itself 
 
 # Setting up a bot token
 
-You'll need to provide your [Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token) via env var (you should set it as `DPM_TOKEN` for this script, and also as `TF_VAR_discord_token` for the Terraform config):
+You'll need to provide your [Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token) via env var (you should set it as `DPM_BOT_TOKEN` for this script, and also as `TF_VAR_discord_token` for the Terraform config):
 
 ```
-export DPM_TOKEN=xxxx
+export DPM_BOT_TOKEN=xxxx
 export TF_VAR_discord_token=xxxx # the name is case-sensitive!
 ```
 
