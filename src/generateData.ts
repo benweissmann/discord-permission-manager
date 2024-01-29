@@ -10,7 +10,7 @@ locals {
 
 function userData(user: ReferencedUser): string {
   return `
-data discord_member ${user.tfName} {
+data "discord_member" "${user.tfName}" {
   server_id = local.server_id
   user_id   = "${user.id}"
 }
@@ -19,7 +19,7 @@ data discord_member ${user.tfName} {
 
 function roleData(role: ReferencedRole): string {
   return `
-data discord_role ${role.tfName} {
+data "discord_role" "${role.tfName}" {
   server_id = local.server_id
   role_id   = "${role.id}"
 }
@@ -45,5 +45,5 @@ export default function generateData({
     stanzas.push(roleData(role));
   }
 
-  return stanzas.join("\n\n");
+  return stanzas.join("\n\n") + "\n";
 }

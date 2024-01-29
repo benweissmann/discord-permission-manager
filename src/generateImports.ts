@@ -68,5 +68,5 @@ export default function generateImports({
     }
   }
 
-  return stanzas.join("\n\n");
+  return stanzas.join("\n\n") + "\n";
 }

@@ -12,12 +12,12 @@ terraform {
 
   required_providers {
     discord = {
-      source = "Lucky3028/discord"
+      source  = "Lucky3028/discord"
       version = "1.6.0"
     }
   }
 }
 
-provider discord {
-    token = var.discord_token
+provider "discord" {
+  token = var.discord_token
 }

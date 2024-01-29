@@ -39,12 +39,12 @@ function channelResource(channelOrCategory: Channel | Category): string {
 function channelBlock(channel: Channel, category: Category | null): string {
   let categoryLine = "";
   if (category) {
-    categoryLine = `\n  category                 = discord_category_channel.${category.tfName}.id`;
+    categoryLine = `\n  category  = discord_category_channel.${category.tfName}.id`;
   }
 
   let topicLine = "";
   if (channel.kind === "text") {
-    topicLine = `\n  topic                    = ${JSON.stringify(channel.topic)}`;
+    topicLine = `\n  topic     = ${JSON.stringify(channel.topic)}`;
   }
 
   // A note about sync_perms_with_category: this is a "feature" of the Terraform
@@ -58,12 +58,12 @@ function channelBlock(channel: Channel, category: Category | null): string {
 
   return `
 resource "${channelResource(channel)}" "${channel.tfName}" {
-  name                     = "${channel.name}"${categoryLine}${topicLine}
-  position                 = ${channel.position}
-  server_id                = local.server_id
+  name      = "${channel.name}"${categoryLine}${topicLine}
+  position  = ${channel.position}
+  server_id = local.server_id
 
   sync_perms_with_category = false
-  lifecycle { ignore_changes = [ sync_perms_with_category ] }
+  lifecycle { ignore_changes = [sync_perms_with_category] }
 }
   `.trim();
 }
@@ -95,7 +95,7 @@ function channelPermissionBlock(
   }
 
   return `
-data discord_permission "${overwrite.tfName}" {
+data "discord_permission" "${overwrite.tfName}" {
 ${permissionLines}
 }
 resource "discord_channel_permission" "${overwrite.tfName}" {
@@ -171,5 +171,5 @@ export default function generateConfig({
     }
   }
 
-  return stanzas.join("\n\n");
+  return stanzas.join("\n\n") + "\n";
 }
