@@ -42,6 +42,11 @@ function channelBlock(channel: Channel, category: Category | null): string {
     categoryLine = `\n  category                 = discord_category_channel.${category.tfName}.id`;
   }
 
+  let topicLine = "";
+  if (channel.kind === "text") {
+    topicLine = `\n  topic                    = ${JSON.stringify(channel.topic)}`;
+  }
+
   // A note about sync_perms_with_category: this is a "feature" of the Terraform
   // provider, not the Discord API. Unfortunately, it defaults to "true" and
   // the provider calculates the "current" value based on whether the permissions
@@ -53,7 +58,7 @@ function channelBlock(channel: Channel, category: Category | null): string {
 
   return `
 resource "${channelResource(channel)}" "${channel.tfName}" {
-  name                     = "${channel.name}"${categoryLine}
+  name                     = "${channel.name}"${categoryLine}${topicLine}
   position                 = ${channel.position}
   server_id                = local.server_id
 

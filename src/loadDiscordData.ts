@@ -11,6 +11,7 @@ import {
   APIRole,
   APIOverwrite,
   OverwriteType,
+  APIGuildTextChannel,
 } from "discord-api-types/v10";
 import { REST } from "discord.js";
 
@@ -28,6 +29,7 @@ export type Channel = {
   kind: "text" | "voice";
   parent: string | null;
   position: number;
+  topic: string | null;
   permissionOverwrites: PermissionOverwrite[];
   tfName: string;
 };
@@ -109,11 +111,9 @@ export default async function loadDiscordData(
   }
 
   // TODO: we should probably paginate this
-  const apiUsers = (await client.get(
-    Routes.guildMembers(serverId), {
-      query: new URLSearchParams({ limit: "1000" }),
-    },
-  )) as APIGuildMember[];
+  const apiUsers = (await client.get(Routes.guildMembers(serverId), {
+    query: new URLSearchParams({ limit: "1000" }),
+  })) as APIGuildMember[];
 
   const userNames: { [id: string]: string } = {};
   for (const apiUser of apiUsers) {
@@ -129,9 +129,10 @@ export default async function loadDiscordData(
     roleNames[apiRole.id] = apiRole.name;
   }
 
-  const apiChannels = (await client.get(
-    Routes.guildChannels(serverId)
-  )) as APIGuildChannel<any>[];
+  const apiChannels = (await client.get(Routes.guildChannels(serverId))) as (
+    | APIGuildChannel<any>
+    | APIGuildTextChannel<ChannelType.GuildText>
+  )[];
 
   const channels: Channel[] = [];
   const categories: Category[] = [];
@@ -162,6 +163,7 @@ export default async function loadDiscordData(
         kind: apiChannel.type === ChannelType.GuildText ? "text" : "voice",
         parent: apiChannel.parent_id ?? null,
         position: apiChannel.position,
+        topic: "topic" in apiChannel ? apiChannel.topic ?? null : null,
         tfName: createTfName("channel", apiChannel.name),
         permissionOverwrites:
           apiChannel.permission_overwrites?.map(o =>

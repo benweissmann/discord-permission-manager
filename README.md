@@ -20,9 +20,9 @@ npm install
 
 Unfortunately, the upstream Discord provider had a bug that prevents importing channel permission resources. Until they [merge our fix](https://github.com/Lucky3028/terraform-provider-discord/pull/126), you also need to build a forked provider from source.
 
-Clone the repo: https://github.com/benweissmann/terraform-provider-discord
+Clone the repo: https://github.com/benweissmann/terraform-provider-discord/tree/bsw/import-channel-permission and switch to the `bsw/import-channel-permission` branch.
 
-From that repo, with a go 1.20 toolchain (or above) installed:
+From that branch, with a go 1.20 toolchain (or above) installed:
 
 ```
 go build -o terraform-provider-discord
