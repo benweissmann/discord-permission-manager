@@ -1,0 +1,29 @@
+{
+  "name": "discord-permission-manager",
+  "version": "1.0.0",
+  "description": "This repo uses [asdf](https://asdf-vm.com/) to manage Node.JS and Terraform versions. If you have asdf set up, along with with the [Terraform](https://github.com/asdf-community/asdf-hashicorp) and [NodeJS](https://github.com/asdf-vm/asdf-nodejs) plugins, you can install and use the correct versions with:",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "test": "eslint src --ext .ts && prettier --check src/**/*.ts && tsc --noEmit",
+    "format:write": "prettier --write src/**/*.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^2.2.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20.11.10",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "discord-api-types": "^0.37.67",
+    "discord.js": "^14.14.1",
+    "envalid": "^8.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

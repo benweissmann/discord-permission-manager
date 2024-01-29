@@ -1,0 +1,7 @@
+terraform.tfstate
+terraform.tfstate.backup
+imports.tf
+channels.tf
+data.tf
+.terraform
+.terraform.lock.hcl
