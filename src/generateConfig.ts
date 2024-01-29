@@ -41,6 +41,16 @@ function channelBlock(channel: Channel, category: Category | null): string {
   if (category) {
     categoryLine = `\n  category                 = discord_category_channel.${category.tfName}.id`;
   }
+
+  // A note about sync_perms_with_category: this is a "feature" of the Terraform
+  // provider, not the Discord API. Unfortunately, it defaults to "true" and
+  // the provider calculates the "current" value based on whether the permissions
+  // are currently synced. However, setting it to "false" just disables the syncing
+  // behavior in the provider, which is probably what we want -- but we also have
+  // to add an ignore_changes lifecycle block to prevent the provider from
+  // reporting this as a "change" for every channel where the permissions do
+  // match the parent.
+
   return `
 resource "${channelResource(channel)}" "${channel.tfName}" {
   name                     = "${channel.name}"${categoryLine}
