@@ -10,7 +10,7 @@ This repo uses [asdf](https://asdf-vm.com/) to manage Node.JS and Terraform vers
 asdf install
 ```
 
-Otherwise, manuall install NodeJS xxx and Terraform xxx (or use other versions at your own risk).
+Otherwise, manually install NodeJS 20.11.0 and Terraform 1.7.1 (or use other versions at your own risk).
 
 Then, install the NodeJS dependencies:
 
@@ -41,7 +41,7 @@ provider_installation {
 }
 ```
 
-Note that that path is to the *git repostory directory*, not the binary itself (i.e., that path is to a directory that contains the `terraform-provider-discord` binary, not to the binary itself).
+Note that that path is to the *git repository directory*, not the binary itself (i.e., that path is to a directory that contains the `terraform-provider-discord` binary, not to the binary itself).
 
 # Setting up a bot token
 
@@ -62,7 +62,7 @@ Export the [ID of your Discord server](https://support.discord.com/hc/en-us/arti
 export DPM_SERVER_ID=xxx
 ```
 
-# Runnig the tool
+# Running the tool
 
 Now, you can generate the Terraform for your server's current configuration:
 
