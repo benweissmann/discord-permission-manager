@@ -18,31 +18,6 @@ Then, install the NodeJS dependencies:
 npm install
 ```
 
-Unfortunately, the upstream Discord provider had a bug that prevents importing channel permission resources. Until they [merge our fix](https://github.com/Lucky3028/terraform-provider-discord/pull/126), you also need to build a forked provider from source.
-
-Clone the repo: https://github.com/benweissmann/terraform-provider-discord/tree/bsw/import-channel-permission and switch to the `bsw/import-channel-permission` branch.
-
-From that branch, with a go 1.20 toolchain (or above) installed:
-
-```
-go build -o terraform-provider-discord
-```
-
-You should end up with a `terraform-provider-discord` binary. Running this binary should print a message saying that it's a Terraform plugin.
-
-Then, instruct Terraform to use your fork by creating a `.terraformrc` file in your Home directory with:
-
-```terraform
-provider_installation {
-  dev_overrides {
-    "registry.terraform.io/Lucky3028/discord" = "/path/to/repo/for/terraform-provider-discord"
-  }
-  direct {}
-}
-```
-
-Note that that path is to the *git repository directory*, not the binary itself (i.e., that path is to a directory that contains the `terraform-provider-discord` binary, not to the binary itself).
-
 # Setting up a bot token
 
 You'll need to provide your [Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#your-bot-s-token) via env var (you should set it as `DPM_BOT_TOKEN` for this script, and also as `TF_VAR_discord_token` for the Terraform config):
